@@ -1,0 +1,85 @@
+<kendo-dialog [title]="" [minWidth]="250" [width]="450" >
+  <div align="center">
+    <form [formGroup]="form">
+      <table border="0" cellpadding="2" cellspacing="2" style="width: 97%">
+        <tbody>
+        <tr>
+          <td width="30%"></td>
+          <td width="28%"></td>
+          <td width="4%"></td>
+          <td width="28%"></td>
+          <td width="10"></td>
+        </tr>
+        <tr>
+          <td colspan="4" align="center"></td>
+          <td align="right">
+            <button class="k-button close-button" (click)="onClose($event)">x</button>
+          </td>
+        </tr>
+        <tr>
+          <td colsan="4">Номер карты <span style="color: #FF0000; ">*</span>:</td>
+          <td align="center"></td>
+        </tr>
+        <tr>
+          <td colspan="4"><input class="form-control" size="7" type="text" formControlName="cardNumber" #cardNumber></td>
+          <div *ngIf="form.get('cardNumber').invalid && form.get('cardNumber').touched" class="validation">
+            <small *ngIf="form.get('cardNumber').errors.required"><span style="color: #FF0000; ">Введите номер карты</span></small></div>
+         <td></td>
+        </tr>
+        <tr>
+          <td> Месяц / Год</td>
+          <td align="right"><input minlength="2" maxlength="2" class="form-control-input" type="text" formControlName="cardMonth" #cardMonth></td>
+          <div *ngIf="form.get('cardMonth').invalid && form.get('cardMonth').touched" class="validation">
+            <small *ngIf="form.get('cardMonth').errors.required"><span style="color: #FF0000; ">Введите месяц</span></small>
+            <small *ngIf="form.get('cardMonth').errors.minlength"><span style="color: #FF0000; ">Длина должна быть не менее {{form.get('cardMonth').errors.minlength.requiredLength}}</span></small>
+            <small *ngIf="form.get('cardMonth').errors.maxlength"><span style="color: #FF0000; ">Длина должна быть не более {{form.get('cardMonth').errors.maxlength.requiredLength}}</span></small>
+          </div>
+          <td align="center">/</td>
+          <td align="left"> <input minlength="2" maxlength="2" class="form-control-input" type="text" formControlName="cardYear" #cardYear></td>
+          <div *ngIf="form.get('cardYear').invalid && form.get('cardYear').touched" class="validation">
+            <small *ngIf="form.get('cardYear').errors.required"><span style="color: #FF0000; ">Введите год</span></small>
+            <small *ngIf="form.get('cardYear').errors.minlength"><span style="color: #FF0000; ">Длина должна быть не менее {{form.get('cardYear').errors.minlength.requiredLength}}</span></small>
+            <small *ngIf="form.get('cardYear').errors.maxlength"><span style="color: #FF0000; ">Длина должна быть не более {{form.get('cardYear').errors.maxlength.requiredLength}}</span></small>
+          </div>
+          <td></td>
+        </tr>
+        <tr>
+          <td colspan="4">ФИО <span style="color: #FF0000; ">*</span></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td colspan="4"><input class="form-control" type="text" formControlName="cardName" #cardName>
+            <div *ngIf="form.get('cardName').invalid && form.get('cardName').touched" class="validation">
+              <small *ngIf="form.get('cardName').errors.required"><span style="color: #FF0000; ">Введите имя</span></small></div>
+          </td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>CVS <span style="color: #FF0000; ">*</span></td>
+          <td align="left"><input maxlength="3" class="form-control-input" type="text" formControlName="cardCVS" #cardCVS></td>
+          <div *ngIf="form.get('cardCVS').invalid && form.get('cardCVS').touched" class="validation">
+            <small *ngIf="form.get('cardCVS').errors.required"><span style="color: #FF0000; ">Введите cvs</span></small>
+            <small *ngIf="form.get('cardCVS').errors.minlength"><span style="color: #FF0000; ">Длина должна быть не менее {{form.get('cardCVS').errors.minlength.requiredLength}}</span></small>
+            <small *ngIf="form.get('cardCVS').errors.maxlength"><span style="color: #FF0000; ">Длина должна быть не более {{form.get('cardCVS').errors.maxlength.requiredLength}}</span></small>
+          </div>
+          <td colspan="3"></td>
+        </tr>
+        <tr>
+          <td colspan="4">Сумма <span style="color: #FF0000; ">*</span></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td colspan="4"><input class="form-control" disabled="disabled" type="text" value={{sum}} #summ>
+          </td>
+          <td></td>
+        </tr>
+        <tr>
+          <td colspan="4" align="right">
+            <button [disabled]="form.invalid" (click)="onClickSave()">Подтвердить</button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </form>
+  </div>
+</kendo-dialog>

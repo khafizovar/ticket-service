@@ -1,0 +1,40 @@
+<kendo-dialog [title]="" [minWidth]="400" [maxWidth]="700" [width]="700">
+  <div align="center" id="exportthis"><p></p>
+    <table border="0" cellpadding="1" cellspacing="1" style="width: 97%">
+      <tbody>
+      <tr>
+        <td width="30%" rowspan="8"><img src="{{imgSrc}}" width="100px"></td>
+        <td width="66%" align="center" class="title-ticket">{{nameTicket}} <b>{{title}}</b></td>
+        <td width="4%" align="right"><button class="k-button close-button" (click)="onClose($event)">x</button></td>
+      </tr>
+      <tr>
+        <td align="center" colspan="2">{{dataTicketString}}<td></td>
+      </tr>
+      <tr>
+        <td colspan="2"><b>{{locActivity}}</b></td>
+      </tr>
+      <tr>
+        <td colspan="2">{{dataRowNum}}</td>
+      </tr>
+      <tr>
+        <td colspan="2"><br></td>
+      </tr>
+      <tr>
+        <td colspan="2">{{textStatus}}</td>
+      </tr>
+      <tr>
+        <td colspan="2"><b>{{textSign}}</b></td>
+      </tr>
+      <tr>
+        <td colspan="2" align="right"><img src="http://localhost:4200/assets/imgs/print.jpg"
+                                           [width]="50"
+                                           (click)="openPDF()" style="cursor: pointer">
+          <!--<button type="button" (click)="openPDF()">Открыть в PDF</button>-->
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+</kendo-dialog>
+

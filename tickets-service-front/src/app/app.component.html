@@ -1,0 +1,60 @@
+<div style="padding-left: 50px; padding-right: 50px; min-width:1000px;">
+  <header class="container" style="left:50%;">
+    <div  class="container" style="padding: 5px;">
+        <div class="row">
+          <div class="col-2">
+            <a href="./shared/city-selector/city-selector.component.ts" (click)="showCitySelector($event)">{{selectedCity}}</a>
+          </div>
+          <div class="col-6">
+            <div class="input-group mb-3">
+              <input type="text" name="title" class="form-control" [(ngModel)]="nameTitle" placeholder="Поиск" >
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button"  (click)="activitySelected(nameTitle)" >Поиск</button>
+              </div>
+            </div>
+          </div>
+          <div class="col-2">
+            <a href="./shared/login/login.component.ts" kendoButton style="float: right"
+                    (click)="showLoginSelector($event)">
+              <label>{{titleAuthorized}}</label>
+            </a>
+          </div>
+          <div class="col-2">
+            <a href="./shared/personal-area/personal-area.component.ts" kendoButton style="float: right"
+               (click)="showPersonalSelector($event)">
+              <label>{{titlePerson}}</label>
+            </a>
+          </div>
+      </div>
+    </div>
+    <div class="nav-bar-container">
+      <app-nav-bar style="left: 50%" [currentCity]="selectedCity"></app-nav-bar>
+    </div>
+  </header>
+  <router-outlet></router-outlet>
+
+</div>
+<kendo-window [title]="" *ngIf="citySelectorOpened" [width]="450" [height]="450" [draggable]="false" [state]="citySelectorWindowState">
+  <kendo-window-titlebar [hidden]="true"></kendo-window-titlebar>
+  <app-city-selector class="fill-parent" (citySelectedEvent)="citySelected($event)"></app-city-selector>
+</kendo-window>
+
+<kendo-window [title]="" *ngIf="loginSelectorOpened" [top]="200" [width]="600" [height]="200" [draggable]="false">
+  <kendo-window-titlebar [hidden]="true"></kendo-window-titlebar>
+  <app-login class="fill-parent" (loginSelectedEvent)="loginSelected($event)"
+             (loginSelectedUser)="loginSelectedUser($event)" (loginCloseEvent)="loginClosed($event)"></app-login>
+</kendo-window>
+<kendo-window [title]="" *ngIf="profileSelectorOpened" [top]="100" [width]="1000" [height]="500" [draggable]="false">
+  <kendo-window-titlebar [hidden]="true"></kendo-window-titlebar>
+  <app-profile class="fill-parent" (profileSelectedUser)="profileSelectedUser($event)"
+               (profileCloseEvent)="profileClosed($event)"></app-profile>
+</kendo-window>
+<kendo-window [title]="" *ngIf="personalSelectorOpened" [top]="100" [width]="1000" [height]="600" [draggable]="false">
+  <kendo-window-titlebar [hidden]="true"></kendo-window-titlebar>
+  <app-personal-area class="fill-parent" (personalSelectedEvent)="personalSelectedUser($event)"
+                     (personalCloseEvent)="personalClosed($event)"></app-personal-area>
+</kendo-window>
+<kendo-window [title]="" *ngIf="activitySelectorOpened" [top]="100" [width]="1100" [height]="700" [draggable]="false">
+  <kendo-window-titlebar [hidden]="true"></kendo-window-titlebar>
+  <activity class="fill-parent" (activityCloseEvent) ="activityClosed($event)"></activity>
+</kendo-window>

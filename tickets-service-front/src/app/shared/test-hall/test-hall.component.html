@@ -1,0 +1,20 @@
+<!-- ЭТО ЗАЛ ДЛ МИЛЯУШИ Begin -->
+<ng-template *ngIf="false">
+<div align="center">
+  <table border="0" cellpadding="1" cellspacing="1" style="width: 97%">
+    <tbody>
+    <tr>
+      <td width="90%"></td>
+      <td width="10%"></td>
+    </tr>
+    <tr>
+      <td align="center"><button type="button" (click)="onClickHalls()">Зал № {{hallsId}}</button></td>
+      <td><br></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</ng-template>
+
+<app-hall-place *ngIf="hallPlaceOpened" (hallsCloseEvent)="hallsClosed($event)"></app-hall-place>
+<!-- ЭТО ЗАЛ ДЛ МИЛЯУШИ End   -->

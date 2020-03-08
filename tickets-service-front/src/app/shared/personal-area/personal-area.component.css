@@ -1,0 +1,33 @@
+.table-style1 {
+  border: 0;
+  cellpadding: 7;
+  cellspacing: 7;
+  width: 100%;
+}
+
+.th-style {
+  background-color: #433F3F;
+  text-align: center;
+  vertical-align: middle;
+  color: #f3f3f3;
+  font-family: 'Playfair Display', serif;
+  font-size: 13px;
+}
+
+.td-style {
+  text-align: center;
+  vertical-align: middle;
+  font-family: 'Playfair Display', serif;
+  font-size: 14px;
+}
+
+.tr-ticket {
+  text-align: center;
+  vertical-align: middle;
+  font-family: 'Playfair Display', serif;
+  font-size: 14px;
+}
+
+a {
+  text-decoration: none;
+}

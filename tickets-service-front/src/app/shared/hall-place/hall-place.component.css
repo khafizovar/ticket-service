@@ -1,0 +1,24 @@
+table.allTable {
+  background: white;
+  table-layout: fixed;
+}
+
+table.hallTable {
+  background: white;
+  table-layout: fixed;
+}
+
+table.hallTable td {
+  background-color:gray;
+  border: 5px solid white;
+  border-radius: 20px;
+}
+
+td.td_header {
+  align: center;
+  vertical-align: middle;
+  background-color: white;
+  border: 5px solid white;
+  color: #433F3F;
+}
+

@@ -1,0 +1,85 @@
+<div align="center"><p></p>
+  <table border="0" cellpadding="7" cellspacing="7" style="width: 97%">
+    <tbody>
+    <tr>
+      <td></td><td align="center">{{ProfileTitle}}</td><td align="right"><button class="k-button close-button" (click)="onClose($event)">x</button></td>
+    </tr>
+    </tbody>
+  </table>
+  <form [formGroup]="form" > <!-- (submit)="onClickEnter()" -->
+    <table border="0" cellpadding="7" cellspacing="7" style="width: 90%">
+      <tbody>
+      <tr>
+        <td colspan="2"></td>
+      </tr>
+      <tr>
+        <td>Логин (e-mail) <span style="color: #FF0000; ">*</span>:</td>
+        <td><input type="text" formControlName="userLogin" #userLogin>
+          <div *ngIf="form.get('userLogin').invalid && form.get('userLogin').touched" class="validation">
+            <small *ngIf="form.get('userLogin').errors.required"><span style="color: #FF0000; ">Поле логин (e-mail) не может быть пустым</span></small>
+            <small *ngIf="form.get('userLogin').errors.email"><span style="color: #FF0000; ">Введите корректный логин (e-mail)</span></small>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>Пароль <span style="color: #FF0000; ">*</span>:</td>
+        <td><input type="password" formControlName="userPassword" #userPassword>
+          <div *ngIf="form.get('userPassword').invalid && form.get('userPassword').touched" class="validation">
+            <!--<pre>{{form.get('userPassword').errors | json}}</pre>-->
+            <small *ngIf="form.get('userPassword').errors.required"><span style="color: #FF0000; ">Пароль не может быть пустым</span></small>
+            <small *ngIf="form.get('userPassword').errors.minlength"><span style="color: #FF0000; ">Длина должна быть не менее {{form.get('userPassword').errors.minlength.requiredLength}}</span></small>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>Подтвердите пароль <span style="color: #FF0000; ">*</span>:</td>
+        <td><input type="password" formControlName="userConfirmPassword" #userConfirmPassword>
+          <div *ngIf="form.get('userConfirmPassword').invalid && form.get('userConfirmPassword').touched" class="validation">
+            <small *ngIf="form.get('userConfirmPassword').errors.required"><span style="color: #FF0000; ">Это поле не может быть пустым</span></small>
+            <small *ngIf="form.get('userConfirmPassword').errors.minlength"><span style="color: #FF0000; ">Длина должна быть не менее {{form.get('userConfirmPassword').errors.minlength.requiredLength}}</span></small>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>Город:</td>
+        <td>
+          <kendo-combobox [data]="data"
+                          [filterable]="true"
+                          [value]="userloginService.getCurrentCity()"
+                          (valueChange)="valueChange($event)"
+                          (selectionChange)="selectionChange($event)"
+                          (filterChange)="filterChange($event)"
+                          (open)="open()"
+                          (close)="close()" #userCitySelect>
+          </kendo-combobox>
+        </td>
+      </tr>
+      <tr>
+        <td>Имя:</td>
+        <td><input type="text" formControlName="userFirstName" #userFirstName></td>
+      </tr>
+      <tr>
+        <td>Фамилия:</td>
+        <td><input type="text" formControlName="userLastName" #userLastName></td>
+      </tr>
+      <tr>
+        <td>Отчество:</td>
+        <td><input type="text" formControlName="userMiddleName" #userMiddleName></td>
+      </tr>
+      <tr>
+        <td>Телефон:</td>
+        <td><input type="text" formControlName="userPhoneNumber" #userPhoneNumber></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>
+          <button (click)="onClickEnter()" [disabled]="form.invalid">{{ProfileBtn}}</button>
+
+          <!--<button #btnProfile
+                  (click)="onClickProfile(userLogin.value, userPassword.value, userConfirmPassword.value, userCitySelect.value, userFirstName.value, userLastName.value, userPhoneNumber.value)">{{ProfileBtn}}</button>-->
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </form>
+</div>

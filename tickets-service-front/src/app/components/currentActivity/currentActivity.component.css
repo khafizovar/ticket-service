@@ -1,0 +1,51 @@
+a{
+  font-size: 140%;
+}
+#date{
+  position: absolute;
+  right: 0;
+}
+
+.table-style1 {
+  border: 0;
+  cellpadding: 1;
+  cellspacing: 1;
+  width: 100%;
+}
+
+.th-style {
+  background-color: #433F3F;
+  text-align: center;
+  vertical-align: middle;
+  color: #f3f3f3;
+  font-family: 'Playfair Display', serif;
+  font-size: 13px;
+}
+
+.title-ticket {
+  font-size: 20px;
+  vertical-align: middle;
+  background: rgba(0,0,0,.2);
+}
+
+.td-style {
+  text-align: center;
+  vertical-align: middle;
+  font-family: 'Playfair Display', serif;
+  font-size: 14px;
+}
+
+.tr-ticket {
+  text-align: center;
+  vertical-align: middle;
+  font-family: 'Playfair Display', serif;
+  font-size: 14px;
+}
+
+.tr-null {
+  text-align: center;
+  vertical-align: middle;
+  font-family: 'Playfair Display', serif;
+  font-size: 6px;
+  color: white;
+}

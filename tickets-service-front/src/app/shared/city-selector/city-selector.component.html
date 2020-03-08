@@ -1,0 +1,7 @@
+<div class="row" id="outer">
+    <div id="container" class="col-md-4 col-12 container">
+      <ul class="list-unstyled row"  >
+        <li class="list-item col-3 border-top py-2" style="cursor: pointer;" *ngFor="let city of citiesList" (click)="citySelectedEvent.emit(city)">{{city}}</li>
+      </ul>
+    </div>
+</div>

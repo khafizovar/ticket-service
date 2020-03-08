@@ -1,0 +1,17 @@
+<div class="container">
+
+  <div class="row">
+    <div id="container" class="col-12 container">
+      <ul class="list-unstyled row"  >
+        <li class="list-item col-3 border-top py-2" style="cursor: pointer;" *ngFor="let poster of gridData" >
+          <div class="col-1">
+            <div class="row"><img (click)="posterClick(poster)" style="width:216px; heigh:314px; " src="../../../assets/imgs/{{poster.postersByPosterId.poster}}"></div>
+            <div class="row"><h3>{{poster.title}}</h3></div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<currentActivity *ngIf="currentActivityFilmOpened" (currentActivityFilmCloseEvent)="currentActivityClosed($event)"></currentActivity>
+

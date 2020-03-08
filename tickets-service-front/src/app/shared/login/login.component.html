@@ -1,0 +1,51 @@
+<div align="center">
+  <table border="0" cellpadding="7" cellspacing="7" style="width: 97%">
+    <tbody>
+    <tr>
+      <td></td>
+      <td align="center">Авторизация</td>
+      <td align="right">
+        <button class="k-button close-button" (click)="onClose($event)">x</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <form [formGroup]="form">
+    <table border="0" cellpadding="5" cellspacing="5" style="width: 500px">
+      <tbody>
+      <tr>
+        <td align="right">Логин (e-mail) <span style="color: #FF0000; ">*</span>:</td>
+        <td align="left"><input type="text" formControlName="userLogin" #userLogin>
+          <div *ngIf="form.get('userLogin').invalid && form.get('userLogin').touched" class="validation">
+            <small *ngIf="form.get('userLogin').errors.required"><span style="color: #FF0000; ">Поле логин (e-mail) не может быть пустым</span></small>
+            <small *ngIf="form.get('userLogin').errors.email"><span style="color: #FF0000; ">Введите корректный логин (e-mail)</span></small>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td align="right">Пароль <span style="color: #FF0000; ">*</span>:</td>
+        <td align="left"><input type="password" formControlName="userPassword" #userPassword>
+          <div *ngIf="form.get('userPassword').invalid && form.get('userPassword').touched" class="validation">
+            <small *ngIf="form.get('userPassword').errors.required"><span style="color: #FF0000; ">Пароль не может быть пустым</span></small>
+            <small *ngIf="form.get('userPassword').errors.minlength"><span style="color: #FF0000; ">Длина должна быть не менее {{form.get('userPassword').errors.minlength.requiredLength}}</span></small>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2"></td>
+      </tr>
+      <tr>
+        <td align="right">
+          <button type="button" #btnLogin [disabled]="form.invalid" (click)="onClickEnter()">Вход</button>
+        </td>
+        <td align="left">
+          <button type="button" #btnRegistration (click)="onClickReg()">Регистрация</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </form>
+  <div (show)="isLoginFailed">
+    <div style="color: red;">{{errorMessage}}</div>
+  </div>
+</div>

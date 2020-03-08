@@ -1,0 +1,72 @@
+<div class="container">
+
+  <div class="row">
+    <div class="col"></div>
+    <div class="col">
+      <div class="row">
+        <!-- <div class="col-2">
+          <img src="../assets/imgs/custom-logo.png" style="max-width: 100%; max-height: 100%;"/>
+        </div> -->
+        <div class="col">
+          <kendo-daterange style="float: right;">
+            <label>
+              <span class="label">Выбрать даты мероприятий: </span><br>
+            </label>
+            <label>
+              <kendo-dateinput kendoDateRangeStartInput (valueChange)="changeDateStart($event)"  [(value)]="range.start"></kendo-dateinput>
+              <span class="label"> - </span>
+              <kendo-dateinput kendoDateRangeEndInput (valueChange)="changeDateEnd($event)"  [(value)]="range.end"></kendo-dateinput>
+            </label>
+
+          </kendo-daterange>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div *ngIf="!checkDate"class="row">
+    <ngb-carousel>
+      <ng-template  ngbSlide *ngFor="let poster of postersForCarousel">
+        <div class="picsum-img-wrapper"  (click)="posterClick(poster)" (click)="showActivitySelector($event)"  style="cursor: pointer;">
+          <img  src="../../../assets/imgs/{{poster.postersByPosterId.poster}}">
+        </div>
+        <div class="carousel-caption">
+          <h3>{{poster.title}}</h3>
+          <p>{{poster.text}}</p>
+        </div>
+      </ng-template>
+    </ngb-carousel>
+  </div>
+  <div class="row">
+    <div id="container" class="col-12 container">
+         
+      <ul class="list-unstyled row"  >
+        <li class="list-item col-3 border-top py-2" style="cursor: pointer;" *ngFor="let poster of gridData; let i = index; let even = even;" (click)="eventInfo(poster)">
+          <div class="col-1">
+            <div class="row">
+
+              <img  href="./shared/city-selector/city-selector.component.ts"    (click)="posterClick(poster)" (click)="showActivitySelector($event)"   style="width:216px; heigh:314px; " src="../../../assets/imgs/{{poster.postersByPosterId.poster}}"></div>
+            <!--
+                         (click)="posterClick(poster)"
+            -->
+            <div class="row"><h3>{{poster.title}}</h3></div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<!--
+<kendo-window [title]="" *ngIf="activityDateSelectorOpened"  [top]="200" [width]="800" [height]="500" [draggable]="false" [state]="activityDateSelectorWindowState">
+  <kendo-window-titlebar [hidden]="true"></kendo-window-titlebar>
+  <currentActivity class="fill-parent" (activityDateSelectedEvent)="activityDateSelected($event)"></currentActivity>
+</kendo-window>
+-->
+
+<kendo-window [title]="" *ngIf="activityDateSelectorOpened" [top]="150" [width]="1000" [height]="800" [draggable]="false">
+  <kendo-window-titlebar [hidden]="true"></kendo-window-titlebar>
+  <currentActivity class="fill-parent" (currentActivityCloseEvent)="activityDateSelected($event)" (activityDateSelectedEvent)="activityDateSelected($event)"  (mouseup)="isMouseUp($event)" (activityDateCloseEvent)="activityDateClosed($event)"></currentActivity>
+  <!--
+    (loginCloseEvent)="loginClosed($event)"
+  -->
+</kendo-window>

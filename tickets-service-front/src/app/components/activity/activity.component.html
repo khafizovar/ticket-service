@@ -1,0 +1,25 @@
+<div class="container">
+  <table border="0" cellpadding="7" cellspacing="7" style="width: 97%">
+    <tbody>
+    <tr>
+      <td></td>
+      <td align="right">
+        <button class="k-button close-button" (click)="onClose($event)">x</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <div class="row">
+    <div id="container" class="col-12 container">
+      <ul class="list-unstyled row"  >
+        <li class="list-item col-3 border-top py-2" style="cursor: pointer;" *ngFor="let poster of gridData">
+          <div class="col-1">
+            <div class="row"><img  (click)="posterClick(poster)" style="width:216px; heigh:314px; " src="../../../assets/imgs/{{poster.postersByPosterId.poster}}"></div>
+            <div class="row"><h3>{{poster.title}}</h3></div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<currentActivity *ngIf="currentActivityOpened" (currentActivityCloseEvent)="currentActivityClosed($event)"></currentActivity>

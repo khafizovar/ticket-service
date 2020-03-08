@@ -1,0 +1,87 @@
+<kendo-dialog [title]="">
+  <div align="center">
+    <table cellpadding="2" cellspacing="2" class="allTable" [width]="placeAllNum*40+'px'">
+      <thead>
+        <th width="15%"></th>
+        <th width="80%"></th>
+        <th width="5%"></th>
+      </thead>
+      <tbody>
+      <tr>
+        <td colspan="3" align="right"><button class="k-button close-button" (click)="onClose($event)">x</button></td>
+      </tr>
+      <tr>
+        <td></td><td class="td_header" align="center"><b>{{title}}</b></td><td></td>
+      </tr>
+      <tr>
+        <td></td><td class="td_header" align="center">{{time}}, "{{titlePlace}}", {{halls.number}} зал</td><td></td>
+      </tr>
+      <tr>
+        <td class="td_header" align="center">Ряд</td><td></td><td></td>
+      </tr>
+      <tr>
+        <td>
+          <table cellpadding="1" cellspacing="1" class="rowTable" width="100%" height="100%">
+            <tr *ngFor="let colorEnum of colorPlaces; let k = index">
+              <td class="td_header" align="center">{{k+1}}</td>
+            </tr>
+          </table>
+        </td>
+        <td align="center">
+          <table cellpadding="1" cellspacing="1" class="hallTable" width="100%" height="100%">
+            <tbody>
+            <tr *ngFor="let colorEnum of colorPlaces; let i = index" [attr.data-index]="i">
+              <td *ngFor="let placenum of placeAllNumClick; let j = index" [attr.data-index]="j"
+                  (mouseover)="onMouseOver(i, j)"
+                  (mouseout)="onMouseOut(i, j)"
+                  (click)="onClick(i, j)" [title]="(i+1).toString() +' ряд ' + (j+1).toString() + ' место'"
+                  [style.backgroundColor]="colorEnum.groundColor[j]"
+                  [style.color]="colorEnum.fontColor[j]"
+                  align="center">{{placenum}}
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr><td colspan="2"></td><tr><td colspan="2"></td></tr><tr><td colspan="2"></td></tr><tr><td colspan="2"></td></tr><tr><td colspan="2"></td></tr>
+      <tr>
+        <td></td>
+        <td ><img src="{{imgSrc}}free.jpg" width="25px"> - свободное место&nbsp;&nbsp;<img src="{{imgSrc}}block_their.jpg" width="25px"> - занятое место&nbsp;&nbsp;<img src="{{imgSrc}}block_you.jpg" width="25px"> - забронировано вами&nbsp;</td><td></td>
+      </tr>
+      <tr>
+        <td>
+          &nbsp;
+        </td>
+        <td>
+          &nbsp;
+        </td>
+        <td>
+          &nbsp;
+        </td>
+      </tr>
+      <tr>
+        <td></td>
+        <!--<td align="left"><label><input type="checkbox" [(ngModel)]="isCheked">&nbsp;&nbsp;Я согласен с условиями <a routerLink="./shared/terms-of-use/terms-of-use.component.ts" target="_blank"> пользовательского соглашения</a>  </label></td><td></td>-->
+        <td align="left"><label><input type="checkbox" [(ngModel)]="isCheked">&nbsp;&nbsp;Я согласен с условиями <label (click)="onTermsOfUse()"><u>пользовательского соглашения</u></label></label></td><td></td>
+      </tr>
+      <tr>
+        <td>
+          &nbsp;
+        </td>
+        <td>
+          &nbsp;
+        </td>
+        <td>
+          &nbsp;
+        </td>
+      </tr>
+      <tr>
+        <td></td>
+        <td align="right"><button type="button" (click)="onClickBlocked()" [disabled]="!isCheked">Забронировать</button></td><td></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</kendo-dialog>
+  <!--<router-outlet></router-outlet>-->

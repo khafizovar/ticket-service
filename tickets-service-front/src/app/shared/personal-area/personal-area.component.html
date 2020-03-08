@@ -1,0 +1,161 @@
+<div align="center">
+  <div style="padding-left: 50px; padding-right: 50px; max-width:1000px;">
+    <p></p>
+    <table class="table-style1">
+      <tbody>
+      <tr>
+        <td></td>
+        <td align="center">Личный кабинет</td>
+        <td align="right">
+          <button class="k-button close-button" (click)="onClose($event)">x</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    <kendo-tabstrip (tabSelect)="onTabSelect($event)">
+      <kendo-tabstrip-tab [title]="'Профиль'">
+        <ng-template kendoTabContent>
+          <div align="center"><p></p>
+            <table class="table-style1">
+              <tbody>
+              <tr>
+                <td></td>
+                <td align="center">{{ProfileTitle}}</td>
+                <td align="right"></td>
+              </tr>
+              </tbody>
+            </table>
+            <form [formGroup]="form" (ngSubmit)="submit()">
+              <table class="table-style1">
+                <tbody>
+                <tr>
+                  <td colspan="2"></td>
+                </tr>
+                <tr>
+                  <td>Пароль <span style="color: #FF0000; ">*</span>:</td>
+                  <td><input type="password" (change)="OnChange()" formControlName="userPassword" #userPassword>
+                    <div *ngIf="form.get('userPassword').invalid && form.get('userPassword').touched"
+                         class="validation">
+                      <!--<pre>{{form.get('userPassword').errors | json}}</pre>-->
+                      <small *ngIf="form.get('userPassword').errors.required"><span style="color: #FF0000; ">Пароль не может быть пустым</span></small>
+                      <small *ngIf="form.get('userPassword').errors.minlength"><span style="color: #FF0000; ">Длина должна быть не менее {{form.get('userPassword').errors.minlength.requiredLength}}</span></small>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Подтвердите пароль <span style="color: #FF0000; ">*</span>:</td>
+                  <td><input type="password" (change)="OnChange()" formControlName="userConfirmPassword"
+                             #userConfirmPassword>
+                    <div *ngIf="form.get('userConfirmPassword').invalid && form.get('userConfirmPassword').touched"
+                         class="validation">
+                      <small *ngIf="form.get('userConfirmPassword').errors.required"><span style="color: #FF0000; ">Это поле не может быть пустым</span></small>
+                      <small *ngIf="form.get('userConfirmPassword').errors.minlength"><span style="color: #FF0000; ">Длина должна быть не менее {{form.get('userConfirmPassword').errors.minlength.requiredLength}}</span></small>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Город:</td>
+                  <td>
+                    <kendo-combobox [data]="data"
+                                    [filterable]="true"
+                                    [value]="userloginService.getCurrentCity()"
+                                    (valueChange)="valueChange($event)"
+                                    (selectionChange)="selectionChange($event)"
+                                    (filterChange)="filterChange($event)"
+                                    (open)="open()"
+                                    (close)="close()" #userCitySelect>
+                    </kendo-combobox>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Имя:</td>
+                  <td><input type="text" (change)="OnChange()" formControlName="userFirstName" #userFirstName></td>
+                </tr>
+                <tr>
+                  <td>Фамилия:</td>
+                  <td><input type="text" (change)="OnChange()" formControlName="userLastName" #userLastName></td>
+                </tr>
+                <tr>
+                  <td>Отчество:</td>
+                  <td><input type="text" (change)="OnChange()" formControlName="userMiddleName" #userMiddleName></td>
+                </tr>
+                <tr>
+                  <td>Телефон:</td>
+                  <td><input type="text" (change)="OnChange()" formControlName="userPhoneNumber" #userPhoneNumber></td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>
+                    <button type="submit" [disabled]="form.invalid">{{ProfileBtn}}</button>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </form>
+          </div>
+        </ng-template>
+      </kendo-tabstrip-tab>
+      <kendo-tabstrip-tab [title]="'Мои заказы'" [selected]="true">
+        <ng-template kendoTabContent>
+          <div align="center"><p></p>
+            <table class="table-style1">
+              <tbody>
+              <tr class="th-style">
+                <td width="25%" class="th-style">Место проведения</td>
+                <td width="25%">Событие</td>
+                <td width="20%">Дата</td>
+                <td width="8%">Билет</td>
+                <td width="15%">Статус</td>
+                <td width="7%">х</td>
+              </tr>
+              <tr *ngFor="let userTicket of listUserActivity" class="tr-ticket">
+                <td>
+                  "{{userTicket.activityDateHallsDto.activityByActivityId.locationByLocationId.titlePlace}}",
+                  ул. {{userTicket.activityDateHallsDto.activityByActivityId.locationByLocationId.street}},
+                  д. {{userTicket.activityDateHallsDto.activityByActivityId.locationByLocationId.houseNumber}}
+                </td>
+                <td>
+                  "{{userTicket.activityDateHallsDto.activityByActivityId.title}}
+                  ", {{userTicket.activityDateHallsDto.activityByActivityId.activityTypeByTypeId.activityType}}
+                </td>
+                <td>
+                  {{userTicket.activityDateHallsDto.activityDate| kendoDate: "dd/MM/yyyy HH:mm"}}
+                </td>
+                <td>
+                  <img src="http://localhost:4200/assets/imgs/print1.png" (click)="printTicket(userTicket)" style="cursor: pointer">
+                </td>
+                <td [ngSwitch]="userTicket.ticketStatus">
+                  <ng-template ngSwitchCase="blocked">
+                    <button type="button" (click)="onClickSales(userTicket)">Оплатить</button>
+                  </ng-template>
+                  <ng-template ngSwitchCase="temp_blocked">
+                    <button type="button" (click)="onClickSales(userTicket)">Оплатить</button>
+                  </ng-template>
+                  <ng-template ngSwitchCase="sales">Оплачено</ng-template>
+                </td>
+                <td [ngSwitch]="userTicket.ticketStatus">
+                  <ng-template ngSwitchCase="blocked"><img src="http://localhost:4200/assets/imgs/delete2.png"
+                                                           (click)="deleteTicket(userTicket)" style="cursor: pointer"></ng-template>
+                  <ng-template ngSwitchCase="temp_blocked"><img src="http://localhost:4200/assets/imgs/delete2.png"
+                                                                (click)="deleteTicket(userTicket)" style="cursor: pointer"></ng-template>
+                  <ng-template ngSwitchCase="sales"></ng-template>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="6"><p>&nbsp;</p></td>
+              </tr>
+              <tr>
+                <td colspan="6" align="right"><button type="button" (click)="onClickDelAll(listUserActivity)">Удалить все</button>&nbsp;<button type="button" (click)="onClickPayTickets(listUserActivity)">Оплатить все</button>&nbsp;</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+          <app-deletemodal *ngIf="dialogDeleteOpened" (statusBtn)="statusBtnEvent($event)" ></app-deletemodal>
+          <app-tickets-user *ngIf="ticketPDFOpened" (ticketPDFCloseEvent)="closePDFEvent($event)"></app-tickets-user>
+          <app-payticket *ngIf="payTicketOpened" (statusSale)="statusSaleEvent($event)" (payTicketsCloseEvent)="payTicketsClosed($event)"></app-payticket>
+          <!--<app-payticket *ngIf="payTicketOpened" (payTicketsUser)="ticketsPaied($event)" (payTicketsCloseEvent)="payTicketsClosed($event)"></app-payticket>-->
+        </ng-template>
+      </kendo-tabstrip-tab>
+    </kendo-tabstrip>
+  </div>
+</div>
